@@ -1,0 +1,9 @@
+/node_modules
+/logs
+*.log
+dist
+package-lock.json
+.env
+.vscode
+logs
+uploads
