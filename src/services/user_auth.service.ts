@@ -90,12 +90,24 @@ export class UserAuthService  extends SPSService<UserAuth> {
 
     }
 
+    public async SendOTP(authsession: any): Promise < boolean > {
+        let sessionService = new RefreshSessionService();
+        return sessionService.remove(authsession)
+        
+    }
+
+    public async update(authsession: any): Promise < boolean > {
+        let sessionService = new RefreshSessionService();
+        return sessionService.remove(authsession)
+        
+    }
     
     public async logout(authsession: any): Promise < boolean > {
         let sessionService = new RefreshSessionService();
         return sessionService.remove(authsession)
         
     }
+
     public async authenticate(authLogin: IAuthLogin): Promise < IAuthResult > {
         let sessionService = new RefreshSessionService();
         let userAuth = await this.dataConn.getRepository(UserAuth).findOne({where:{email: authLogin.email}})
