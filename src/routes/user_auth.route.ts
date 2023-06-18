@@ -17,5 +17,6 @@ export class AuthRouter extends Router {
             .post("/login", [ Validator(login) ], this.handler(UserAuthController.prototype.login))
             .post("/logout", this.handler(UserAuthController.prototype.logout))
             .post("/register", [ Validator(register) ], this.handler(UserAuthController.prototype.register))
+            .post("/update", [ Validator(register) ], this.handler(UserAuthController.prototype.update))
     }
 }

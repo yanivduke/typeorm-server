@@ -48,6 +48,12 @@ export class UserAuthService  extends SPSService<UserAuth> {
     }
     
     public async create(loginReg: IAuthRegister): Promise < IRegResult > {
+        let alreadyExits = await this.dataConn.getRepository(UserAuth).findOne({where:{email: loginReg.email}})
+        if(alreadyExits){
+            return {
+                status: RegStatus.Exists
+            }
+        }
         let userAuth = new UserAuth();
         let salt = JwtAction.cryptoRandomBytes(128);
         let sha256 = JwtAction.getHashBySalt(loginReg.password, salt, process.env.PASSWORD_FORMAT)
@@ -57,13 +63,13 @@ export class UserAuthService  extends SPSService<UserAuth> {
         let passcode =  await nanoidShort();
         userAuth.email = loginReg.email;
         userAuth.tokenCreateDate = new Date(); //moment().format(moment.HTML5_FMT.DATETIME_LOCAL_MS);
-        userAuth.isConfirmed = false;
         userAuth.passwordFormat = process.env.PASSWORD_FORMAT;
         userAuth.passwordSalt = salt;
         userAuth.passwordHash = sha256;
         userAuth.confirmToken = roundomNumer + JwtAction.randomValueHex(6);
         userAuth.resetPasswordToken = passcode;
-        userAuth.isApproved = false;
+        userAuth.isConfirmed = false;
+        userAuth.isApproved = true;
         userAuth.isLocked = false;
         userAuth.failedCount = 0;
         userAuth.updatedBy = 0
@@ -74,7 +80,6 @@ export class UserAuthService  extends SPSService<UserAuth> {
             delete answer.passwordSalt;
             return {
                 status: RegStatus.OK,
-                user: answer
             }
         } catch (ex) {
             // logger

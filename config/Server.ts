@@ -14,6 +14,7 @@ import { ROUTER } from "./Router";
 export class Server {
 
     private static connectDB(): DataSource {
+        Connection.initialize()
         return Connection;
     }
 

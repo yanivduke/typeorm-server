@@ -23,7 +23,7 @@ export const ROUTER: IROUTER[] = [
     {
         handler: Auth.router,
         middleware: [],
-        path: "/api/admin/auth",
+        path: "/api/auth",
     },
     
 ];

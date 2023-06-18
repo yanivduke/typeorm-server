@@ -2,7 +2,7 @@ import { DataSource } from 'typeorm';
 import { configApp, isProduction } from "./configApp";
 
 export default new DataSource({
-    synchronize: true, // !!! true will drop the DB !!!
+    synchronize: false, // !!! true will drop the DB !!!
     database: configApp.DATABASE.DB_NAME,
     host: configApp.DATABASE.DB_HOST,
     password: configApp.DATABASE.DB_PASSWORD,

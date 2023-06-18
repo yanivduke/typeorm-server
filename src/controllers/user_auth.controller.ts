@@ -37,14 +37,14 @@ export class UserAuthController extends SPSController<UserAuth> {
             {
                 return this.res.status(HttpStatusCode.OK).send({status: AuthStatus[result.status], session: result.session, token: result.token});
             } else {
-                return this.res.status(HttpStatusCode.NO_CONTENT).send({ status: AuthStatus[result.status] });
+                return this.res.status(HttpStatusCode.UNAUTHORIZED).send({ status: AuthStatus[result.status] });
             }
         } catch (ex) {
             let errId = Logger('error', '"data": ${data} "message": "${msg}"', {
                 data: JSON.stringify(ex),
                 msg: "uset_auth-login: " + ex.message
             })
-            return this.res.status(HttpStatusCode.NOT_ACCEPTABLE).send({ status: "Unexpected", err: errId });
+            return this.res.status(HttpStatusCode.EXPECTATION_FAILED).send({ status: "Unexpected", err: errId });
         }
     }
 
@@ -72,6 +72,15 @@ export class UserAuthController extends SPSController<UserAuth> {
     }
 
     public async register(): Promise<Response> {
+        const newUser: IAuthRegister  = this.req.body;
+        
+        let data = await this.authService.create(newUser);
+
+        return this.res.status(HttpStatusCode.OK).send({status: RegStatus[data.status]});
+    }
+
+
+    public async update(): Promise<Response> {
         const newUser: IAuthRegister  = this.req.body;
         
         let data = await this.authService.create(newUser);
