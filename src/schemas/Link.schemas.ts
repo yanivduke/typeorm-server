@@ -7,7 +7,12 @@ export const new_link = Joi.object().keys({
     link: Joi.string().required(),
     cdate: Joi.date().required(),
     status: Joi.boolean().required(),
-    features: Joi.string().required(),
+    features: Joi.array().items(
+        Joi.object().keys({
+            name: Joi.string().required(),
+            order: Joi.number().required()
+        })
+    ).required(),
 });
 
 export const link_data = Joi.object().keys({

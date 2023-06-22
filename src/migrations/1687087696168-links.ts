@@ -14,7 +14,8 @@ export class Links1687087696168 implements MigrationInterface {
                     name: "id",
                     type: "int",
                     isPrimary: true,
-                    isUnique: true,                
+                    isUnique: true, 
+                    isGenerated:true,               
                 },
                 {
                     name: "name",

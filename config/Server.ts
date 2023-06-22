@@ -1,5 +1,3 @@
-
-import * as bodyParser from "body-parser";
 import * as cors from "cors";
 import * as express from "express";
 import * as http from "http";
@@ -74,7 +72,13 @@ export class Server {
         this.app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction): void => {
             if (err.name === "UnauthorizedError") {
                 res.status(HttpStatusCode.UNAUTHORIZED).json({
-                    error: "Please send a valid Token...",
+                    error: "Please send a valid Authorization Token...",
+                });
+            }
+            if (err.name === "SyntaxError") {
+                res.status(HttpStatusCode.EXPECTATION_FAILED).json({
+                    error: "Your JSON is not parsed well..",
+                    message: err.message
                 });
             }
             next();
