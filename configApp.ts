@@ -36,6 +36,7 @@ export const configApp = {
     NANOID_CHARS: "0123456789abcdefghijklmnopqrstuvwxyz",
     NANOID_LENGTH: 8,
     BASE_URL: process.env.BASE_URL,
+    SITE_URL: process.env.SITE_URL,
     DOMAIN: process.env.DOMAIN,
     UPLOAD_ROOT_PATH: process.env.UPLOAD_ROOT_PATH,
     UPLOAD_BASE_URL: process.env.UPLOAD_BASE_URL,

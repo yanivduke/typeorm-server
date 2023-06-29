@@ -82,17 +82,18 @@ export class UserAuthController extends SPSController<UserAuth> {
 
     public async update(): Promise<Response> {
         const newUser: IAuthRegister  = this.req.body;
+        const passcode: string = this.req.params.resetPasswordToken
         
-        let data = await this.authService.create(newUser);
+        let data = await this.authService.update(newUser, passcode);
 
         return this.res.status(HttpStatusCode.OK).send({status: "OK", data: data});
     }
 
 
     public async SendOPT(): Promise<Response> {
-        const newUser: IAuthRegister  = this.req.body;
+        const email: string = this.req.params.email
         
-        let data = await this.authService.create(newUser);
+        let data = await this.authService.SendOTP(email);
 
         return this.res.status(HttpStatusCode.OK).send({status: "OK", data: data});
     }
