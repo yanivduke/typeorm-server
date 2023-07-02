@@ -29,7 +29,7 @@ export class SPSService<T> {
         let arrDirs: Array<string> = JSON.parse( sp.sortDir )
         let orderBy: any
         if (arrFields.length > 0) {
-            orderBy = Object.assign.apply({}, arrFields.map( (v, i) => ( {[v]: arrDirs[i]? "DESC" : "ASC"} ) ) );
+            orderBy = Object.assign.apply({}, arrFields.map( (v, i) => ( {[v]: (arrDirs[i].toLowerCase()=='desc') ? "DESC" : "ASC"} ) ) );
             
         }
 
@@ -68,9 +68,9 @@ export class SPSService<T> {
                     switch (sf.type) {
                         case "text":
                             if (sf.operator=='=') {
-                                querySps.andWhere(`${fieldName} = :${fieldName}`, JSON.parse(`{"${fieldName}": "${sf.value}"}`))
+                                querySps.andWhere(`"${fieldName}" = :${fieldName}`, JSON.parse(`{"${fieldName}": "${sf.value}"}`))
                             } else {
-                                querySps.andWhere(`${fieldName} like :${fieldName}`, JSON.parse(`{"${fieldName}": "%${sf.value}%"}`))
+                                querySps.andWhere(`"${fieldName}" like :${fieldName}`, JSON.parse(`{"${fieldName}": "%${sf.value}%"}`))
                             }
                             break;
                         case "number":

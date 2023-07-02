@@ -80,7 +80,7 @@ axios.request(options).then(function (response) {
 METHOD: Put
 Send reset request (OTP) --> trigger for reset password email.
 Generated email includes a uniq link like:
-https://moveo.chita.co.il/reset/?token=647383
+https://momom.chicha.co.il/reset/?token=647383
 
 #### example
 const options = {
@@ -120,7 +120,7 @@ const options = {
   data: '{
  'name':'‫הבית‬ ‫עד‬ ‫ארצי‬ ‫פנים‬', 
  'desc':'‫אמט‬ ‫סיט‬ ‫דולור‬ ‫איפסום‬ ‫לורם‬', 
- 'link':'https://cheetah-base-link/?param1=true&param2=false','cdate':'2023-05-19', 
+ 'link':'https://chichu/?param1=true&param2=false','cdate':'2023-05-19', 
  'status': true, 
  'features': [
       {
@@ -154,3 +154,13 @@ update link status
 METHOD: Get
 Get history data
 with paging
+
+http://localhost:3101/api/link/?psize=5&pnum=1&sfield=["id"]&sdir=["ASC"]&search=[{"id":"desc","value":"אמט","type":"text","operator":"~"}]
+{
+  "id":"fieldName",
+  "value":"searchText",
+  "type":"text/number",
+  "operator":
+    for text - "~"/"="
+    for number - "=",">","<"
+}
