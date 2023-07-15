@@ -3,7 +3,8 @@ import * as express from "express";
 import { 
     AuthRouter, 
     RefreshRouter, 
-    LinkRouter
+    LinkRouter,
+    ClientRouter
 } from "../src/routes";
 
 interface IROUTER {
@@ -15,22 +16,28 @@ interface IROUTER {
 const Auth = new AuthRouter()
 const Refresh = new RefreshRouter()
 const Link = new LinkRouter()
+const Client = new ClientRouter()
 
 export const ROUTER: IROUTER[] = [
     {
         handler: Refresh.router,
         middleware: [],
-        path: "/api",
+        path: "/api/refresh",
     },
     {
         handler: Auth.router,
         middleware: [],
-        path: "/api/auth",
+        path: "/api/admin/auth",
     },
     {
         handler: Link.router,
         middleware: [],
-        path: "/api/link",
+        path: "/api/admin/link",
+    },
+    {
+        handler: Client.router,
+        middleware: [],
+        path: "/api",
     },
     
 ];

@@ -10,7 +10,12 @@ export class LinkService  extends SPSService<Link> {
     
     public async getDetails(id: number): Promise<Link> {
         let link = await this.dataConn.getRepository(Link).findOne({where:{id: id}});
-        
+        delete link.cdate;
+        delete link.desc;
+        delete link.id;
+        delete link.link;
+        delete link.name;
+        delete link.status;
         return link;
     }
     

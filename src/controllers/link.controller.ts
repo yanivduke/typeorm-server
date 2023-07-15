@@ -17,9 +17,9 @@ export class LinkController extends SPSController<Link> {
 
     }
 
-    public async Get(): Promise<Response> {
+    public async GetDetails(): Promise<Response> {
         const id: any  = this.req.params.id;
-        let data = await this.service.get(id);
+        let data = await (this.service as LinkService).getDetails(id);
 
         return this.res.status(HttpStatusCode.OK).send({status: "OK", data: data});
     }
