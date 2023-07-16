@@ -2,7 +2,7 @@
 import { IAuthRegister, IPaymentAuth, IAuthLogin, AuthStatus, IAuthResult, IAuthInfo, RegStatus, IRegResult } from "./user_auth.interface";
 import { IUserRole, IRole, ROLES } from "./user_role.interface";
 import { IRefreshToken } from "./refresh_session.interface";
-import { ILink, ILinkData, ILinkStatus } from "./link.interface";
+import { ILink, ILinkData, ILinkStatus,IFeature } from "./link.interface";
 
 import { HttpStatusCode } from "./http_statuses.interface";
 
@@ -21,5 +21,6 @@ export {
     HttpStatusCode,
     ILink,
     ILinkData,
-    ILinkStatus
+    ILinkStatus,
+    IFeature
 };

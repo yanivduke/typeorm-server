@@ -9,7 +9,12 @@ export interface ILink {
     link: string;
     cdate: Date;
     status: boolean;
-    features: string
+    features: string;
+}
+
+export interface IFeature {
+    name: string;
+    order: number;
 }
 
 export interface ILinkData {

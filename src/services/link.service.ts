@@ -1,5 +1,5 @@
 
-import { ILink, ILinkData, ILinkStatus } from "../Interfaces";
+import { IFeature, ILink, ILinkData, ILinkStatus } from "../Interfaces";
 import { Link } from "../entities";
 import { SPSService } from "./sps.service";
 
@@ -8,7 +8,8 @@ export class LinkService  extends SPSService<Link> {
         super(Link);
     }
     
-    public async getDetails(id: number): Promise<Link> {
+    public async getDetails(id: number): Promise<IFeature[]> {
+        let arr2ret = new Array<IFeature>();
         let link = await this.dataConn.getRepository(Link).findOne({where:{id: id}});
         delete link.cdate;
         delete link.desc;
@@ -16,7 +17,12 @@ export class LinkService  extends SPSService<Link> {
         delete link.link;
         delete link.name;
         delete link.status;
-        return link;
+        let str = '[' + link.features.substring(1, link.features.length-1) + ']';
+        let objArr = JSON.parse(str);
+        objArr.forEach((element: IFeature) => {
+            arr2ret.push(JSON.parse(element as any));
+        });
+        return arr2ret;
     }
     
     public async create(new_link: ILink): Promise<Link> {
